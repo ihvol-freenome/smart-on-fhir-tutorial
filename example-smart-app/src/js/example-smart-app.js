@@ -18,7 +18,31 @@
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4',
-                              'http://loinc.org|18746-8']
+                              'http://loinc.org|18746-8',
+                              'http://loinc.org|77353-1',
+                              'http://loinc.org|77354-9',
+                              'http://loinc.org|12503-9',
+                              'http://loinc.org|12504-7',
+                              'http://loinc.org|14563-1',
+                              'http://loinc.org|14564-9',
+                              'http://loinc.org|14565-6',
+                              'http://loinc.org|2335-8',
+                              'http://loinc.org|27396-1',
+                              'http://loinc.org|27401-9',
+                              'http://loinc.org|27925-7',
+                              'http://loinc.org|27926-5',
+                              'http://loinc.org|29771-3',
+                              'http://loinc.org|56490-6',
+                              'http://loinc.org|56491-4',
+                              'http://loinc.org|57905-2',
+                              'http://loinc.org|58453-2',
+                              'http://loinc.org|80372-6',
+                              'http://loinc.org|60515-4',
+                              'http://loinc.org|72531-7',
+                              'http://loinc.org|79069-1',
+                              'http://loinc.org|79071-7',
+                              'http://loinc.org|79101-2',
+                              'http://loinc.org|82688-3']
                       }
                     }
                   });
@@ -62,9 +86,42 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-          p.data = JSON.stringify(byCodes('18746-8'));
-          console.log("CRC screenings")
-          console.log(byCodes('18746-8'))
+
+          var crc_codes = [
+            '77353-1',
+            '77354-9',
+            '12503-9',
+            '12504-7',
+            '14563-1',
+            '14564-9',
+            '14565-6',
+            '2335-8',
+            '27396-1',
+            '27401-9',
+            '27925-7',
+            '27926-5',
+            '29771-3',
+            '56490-6',
+            '56491-4',
+            '57905-2',
+            '58453-2',
+            '80372-6',
+            '60515-4',
+            '72531-7',
+            '79069-1',
+            '79071-7',
+            '79101-2',
+            '82688-3'
+          ]
+          for (let i = 0; i < crc_codes.length; i++) {
+            data = byCodes(crc_codes[i]);
+            if (data === undefined || data.length == 0) {
+                console.log(data);
+                continue;
+            }
+            p.data = JSON.stringify(data);
+          }
+          //p.data = JSON.stringify(byCodes('18746-8'));
           //18746-8
 
           ret.resolve(p);
