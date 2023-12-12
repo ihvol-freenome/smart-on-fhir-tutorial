@@ -61,7 +61,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-          p.data = obv
+          p.data = JSON.stringify(byCodes('55284-4'));
 
           ret.resolve(p);
         });
