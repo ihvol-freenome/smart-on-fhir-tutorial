@@ -61,6 +61,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
+          p.data = obv
 
           ret.resolve(p);
         });
@@ -105,6 +106,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      data: {value: ''},
     };
   }
 
@@ -148,7 +150,7 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    $('#test').html('test');
+    $('#data').html(p.data);
   };
 
 })(window);
