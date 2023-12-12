@@ -25,7 +25,7 @@
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
-          createTable(obv)
+          //createTable(obv)
 
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
