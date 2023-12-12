@@ -62,7 +62,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-          p.data = JSON.stringify(byCodes('55284-4'));
+          p.data = JSON.stringify(byCodes('18746-8'));
           console.log("CRC screenings")
           console.log(byCodes('18746-8'))
           //18746-8
