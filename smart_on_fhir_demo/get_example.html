@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GET Request Example</title>
+    <script>
+      function getPatientData() {
+        var xhr = new XMLHttpRequest();
+        var url =
+          "https://api.logicahealth.org/FHIRResearchSynthea/open/Patient";
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            var prettyJSON = JSON.stringify(response, null, 2);
+            document.getElementById("query").innerHTML =
+              "<pre>GET " + url + "</pre>";
+            document.getElementById("jsonOutput").innerHTML =
+              "<pre>" + prettyJSON + "</pre>";
+          }
+        };
+        xhr.send();
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      }
+      pre {
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body onload="getPatientData()">
+    <h1>Query:</h1>
+    <div id="query"></div>
+    <h1>JSON Response:</h1>
+    <div id="jsonOutput"></div>
+  </body>
+</html>
