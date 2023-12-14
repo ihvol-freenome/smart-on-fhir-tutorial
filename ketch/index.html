@@ -19,7 +19,6 @@
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
-    <div id="observationContainer" class="observation-container"></div>
     <div id='holder' >
       <h2>Freenome Example-SMART-App</h2>
 
@@ -71,6 +70,7 @@
         </tr>
       </table>
     </div>
+    <div id="observationContainer" class="observation-container"></div>
     <!-- Required JS files to enable this page to embed within an MPage -->
     <!--
       Temporarily disable cerner-smart-embeddable-lib
@@ -103,11 +103,11 @@
           const observationContainer = document.getElementById('observationContainer');
 
           // Creating HTML content
-          //const htmlContent = `
-          //  <h2>Observation Details</h2>
-          //  <p><strong>Resource Type:</strong> ${p.data[0].resourceType}</p>
-          //  <p><strong>Status:</strong> ${p.data[0].status}</p>
-          //`;
+          const htmlContent = `
+            <h2>Observation Details</h2>
+            <p><strong>Resource Type:</strong> ${p.data[0].resourceType}</p>
+            <p><strong>Status:</strong> ${p.data[0].status}</p>
+          `;
 
           //  <p><strong>Category:</strong> ${p.data[0].category.coding[0].code}</p>
           //  <p><strong>Code:</strong> ${p.data[0].code.coding[0].display}</p>
@@ -117,8 +117,7 @@
           //  <p><strong>Issued:</strong> ${p.data[0].issued}</p>
           //  <p><strong>Value Quantity:</strong> ${p.data[0].valueQuantity.value} ${p.data[0].valueQuantity.unit}</p>
           // Adding HTML content to the container
-          //observationContainer.innerHTML = htmlContent;
-          observationContainer.innerHTML = "hello";
+          observationContainer.innerHTML = htmlContent;
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed

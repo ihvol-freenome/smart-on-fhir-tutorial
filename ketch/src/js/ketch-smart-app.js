@@ -280,7 +280,7 @@
                 console.log(data);
                 continue;
             }
-            p.data = JSON.stringify(data);
+            p.data = data;
           }
           //p.data = JSON.stringify(byCodes('18746-8'));
           //18746-8
@@ -373,7 +373,7 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    $('#data').html(p.data);
+    $('#data').html(JSON.stringify(p.data));
   };
 
 })(window);
