@@ -98,16 +98,16 @@
       extractData().then(
         //Display Patient Demographics and Observations if extractData was success
         function(p) {
-          //drawVisualization(p);
+          drawVisualization(p);
 
           const observationContainer = document.getElementById('observationContainer');
 
           // Creating HTML content
-          const htmlContent = `
-            <h2>Observation Details</h2>
-            <p><strong>Resource Type:</strong> ${p.data[0].resourceType}</p>
-            <p><strong>Status:</strong> ${p.data[0].status}</p>
-          `;
+          //const htmlContent = `
+          //  <h2>Observation Details</h2>
+          //  <p><strong>Resource Type:</strong> ${p.data[0].resourceType}</p>
+          //  <p><strong>Status:</strong> ${p.data[0].status}</p>
+          //`;
 
           //  <p><strong>Category:</strong> ${p.data[0].category.coding[0].code}</p>
           //  <p><strong>Code:</strong> ${p.data[0].code.coding[0].display}</p>
@@ -117,9 +117,8 @@
           //  <p><strong>Issued:</strong> ${p.data[0].issued}</p>
           //  <p><strong>Value Quantity:</strong> ${p.data[0].valueQuantity.value} ${p.data[0].valueQuantity.unit}</p>
           // Adding HTML content to the container
-          observationContainer.innerHTML = htmlContent;
-
-          drawVisualization(p);
+          //observationContainer.innerHTML = htmlContent;
+          observationContainer.innerHTML = "hello";
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed
