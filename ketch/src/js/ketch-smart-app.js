@@ -31,6 +31,7 @@
             var crc_codes_urls = crc_codes.map(function(item) {
                 return 'http://loinc.org|' + item;
             });
+            console.log(crc_codes_urls);
 
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
