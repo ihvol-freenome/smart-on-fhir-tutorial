@@ -8,6 +8,7 @@
     }
 
     function onReady(smart)  {
+      console.log('fetching patient data...');
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
@@ -131,6 +132,7 @@
 
         $.when(pt, obv).done(function(patient, obv) {
           //createTable(obv)
+          console.log('loaded patient data...');
 
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
@@ -282,6 +284,7 @@
           }
           //p.data = JSON.stringify(byCodes('18746-8'));
           //18746-8
+          console.log('rendered patient data...');
 
           ret.resolve(p);
         });
