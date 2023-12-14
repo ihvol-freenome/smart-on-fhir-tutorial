@@ -19,6 +19,7 @@
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
+    <div id="observationContainer" class="observation-container"></div>
     <div id='holder' >
       <h2>Freenome Example-SMART-App</h2>
 
@@ -41,7 +42,7 @@
           <td id='birthdate'></td>
         </tr>
       </table>
-      <h2>Observation Resource</h2>
+      <h2>Observation Resources</h2>
       <table>
         <tr>
           <th>Height:</th>
@@ -70,7 +71,6 @@
         </tr>
       </table>
     </div>
-    <div id="observationContainer" class="observation-container"></div>
     <!-- Required JS files to enable this page to embed within an MPage -->
     <!--
       Temporarily disable cerner-smart-embeddable-lib
@@ -98,7 +98,7 @@
       extractData().then(
         //Display Patient Demographics and Observations if extractData was success
         function(p) {
-          drawVisualization(p);
+          //drawVisualization(p);
 
           const observationContainer = document.getElementById('observationContainer');
 
@@ -118,6 +118,8 @@
 
           // Adding HTML content to the container
           observationContainer.innerHTML = htmlContent;
+
+          drawVisualization(p);
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed
