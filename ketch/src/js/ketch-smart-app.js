@@ -25,6 +25,7 @@
                 '27926-5', '29771-3', '56490-6', '56491-4', '57905-2', '58453-2', '80372-6',
                 '60515-4', '72531-7', '79069-1', '79071-7', '79101-2', '82688-3'
             ];
+            crc_codes.push.apply(crc_codes, ['8302-2','8480-6', '8462-4', '2085-9','55284-4', '2089-1']);
 
             // Concatenate the string to each item in the array
             var crc_codes_urls = crc_codes.map(function(item) {
