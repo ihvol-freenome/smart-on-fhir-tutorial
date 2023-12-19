@@ -95,20 +95,22 @@
         return ret.promise();
     };
 
-    function createTable(tableData) {
-        var table = document.createElement('table');
-        var tableBody = document.createElement('tbody');
-        tableData.forEach(function(rowData) {
-            var row = document.createElement('tr');
-            rowData.forEach(function(cellData) {
-                var cell = document.createElement('td');
-                cell.appendChild(document.createTextNode(cellData));
-                row.appendChild(cell);
-            });
-            tableBody.appendChild(row);
+    function displayObservations(observationData) {
+        let observationsHTML = '';
+        observationData.forEach(observation => {
+            observationsHTML += `
+                <div class="observation">
+                    <div class="observation-header">${observation.code.coding[0].display}</div>
+                    <div class="observation-details">
+                        <p><strong>ID:</strong> ${observation.id}</p>
+                        <p><strong>Identifier:</strong> ${observation.identifier[0].value}</p>
+                        <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
+                        <p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>
+                    </div>
+                </div>
+            `;
         });
-        table.appendChild(tableBody);
-        document.body.appendChild(table);
+        document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
     function defaultPatient() {
@@ -182,6 +184,6 @@
         $('#diastolicbp').html(p.diastolicbp);
         $('#ldl').html(p.ldl);
         $('#hdl').html(p.hdl);
-        $('#data').html(JSON.stringify(p.data));
+        //$('#data').html(JSON.stringify(p.data));
     };
 })(window);
