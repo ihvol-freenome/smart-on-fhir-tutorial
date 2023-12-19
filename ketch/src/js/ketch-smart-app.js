@@ -35,15 +35,16 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                var fname = '';
-                var lname = '';
-                if (typeof patient.name[0] !== 'undefined') {
-                    fname = patient.name[0].given.join(' ');
-                    lname = patient.name[0].family.join(' ');
-                }
+                //var fname = '';
+                //var lname = '';
+                //if (typeof patient.name[0] !== 'undefined') {
+                //    fname = patient.name[0].given.join(' ');
+                //    lname = patient.name[0].family.join(' ');
+                //}
                 var age = getAge(patient.birthDate)
                 if (age < 45 || age > 75){
-                    console.log("${fname} ${lname} is outside of CRC screening eligible age.");
+                    console.log("is outside of CRC screening eligible age.");
+                    //console.log("${fname} ${lname} is outside of CRC screening eligible age.");
                     //$('#errors').html('<p> Failed to call FHIR Service </p>');
                 }
                 var obv = smart.patient.api.fetchAll({
@@ -60,12 +61,12 @@
                     console.log(obv);
                     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
-                    //var fname = '';
-                    //var lname = '';
-                    //if (typeof patient.name[0] !== 'undefined') {
-                    //    fname = patient.name[0].given.join(' ');
-                    //    lname = patient.name[0].family.join(' ');
-                    //}
+                    var fname = '';
+                    var lname = '';
+                    if (typeof patient.name[0] !== 'undefined') {
+                        fname = patient.name[0].given.join(' ');
+                        lname = patient.name[0].family.join(' ');
+                    }
                     var height = byCodes('8302-2');
                     var p = defaultPatient();
                     p.birthdate = patient.birthDate;
