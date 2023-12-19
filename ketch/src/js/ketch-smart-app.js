@@ -102,13 +102,14 @@
                 <div class="observation">
                     <div class="observation-header">${observation.code.coding[0].display}</div>
                     <div class="observation-details">
-                        <p><strong>ID:</strong> ${observation.id}</p>
-                        <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
                         <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
+                        <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
                         <p><strong>Subject Reference:</strong> ${observation.subject.reference}</p>
                         <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
                         <p><strong>Effective DateTime:</strong> ${observation.effectiveDateTime}</p>
                         <p><strong>Status:</strong> ${observation.status}</p>
+                        ${Object.hasOwnProperty(observation.valueQuantity) ? <p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>
+                        <p><strong>ID:</strong> ${observation.id}</p>
                     </div>
                 </div>
             `;
