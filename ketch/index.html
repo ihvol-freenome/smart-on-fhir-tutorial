@@ -20,9 +20,9 @@
       <div class="bounce3"></div>
     </div>
     <div id='holder' >
-      <h2>Freenome Example-SMART-App</h2>
+      <h2>Ketch - Freenome SMART-App</h2>
 
-      <h2>Patient Resource</h2>
+      <h2>Patient Info</h2>
       <table>
         <tr>
           <th>First Name:</th>
@@ -70,7 +70,6 @@
         </tr>
       </table>
     </div>
-    <div id="observationContainer" class="observation-container"></div>
     <div class="observations">
         <h2>CRC related screenings</h2>
         <div id="observationsData" class="info-box"></div>
@@ -103,28 +102,6 @@
         //Display Patient Demographics and Observations if extractData was success
         function(p) {
           drawVisualization(p);
-
-
-          const observationContainer = document.getElementById('observationContainer');
-
-          // Creating HTML content
-          const htmlContent = `
-            <h2>Observation Details</h2>
-            <p><strong>Resource Type:</strong> ${p.data[0].resourceType}</p>
-            <p><strong>Status:</strong> ${p.data[0].status}</p>
-            <p><strong>Category:</strong> ${p.data[0].category.coding[0].code}</p>
-            <p><strong>Code:</strong> ${p.data[0].code.coding[0].display}</p>
-            <p><strong>Subject Reference:</strong> ${p.data[0].subject.reference}</p>
-            <p><strong>Encounter Reference:</strong> ${p.data[0].encounter.reference}</p>
-            <p><strong>Effective DateTime:</strong> ${p.data[0].effectiveDateTime}</p>
-            <p><strong>Issued:</strong> ${p.data[0].issued}</p>
-            <p><strong>Value Quantity:</strong> ${p.data[0].valueQuantity.value} ${p.data[0].valueQuantity.unit}</p>
-          `;
-
-          // Adding HTML content to the container
-          observationContainer.innerHTML = htmlContent;
-
-          //displayObservations(p.data);
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed

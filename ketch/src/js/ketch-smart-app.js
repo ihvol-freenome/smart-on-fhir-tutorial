@@ -38,7 +38,6 @@
                 var pt = patient.read();
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
-                    //type: 'Procedure',
                     query: {
                         code: {
                             $or: crc_codes_urls
@@ -97,7 +96,9 @@
 
     function displayObservations(observationData) {
         let observationsHTML = '';
+        console.log("rendering observations...");
         observationData.forEach(observation => {
+            console.log(observation.id);
             observationsHTML += `
                 <div class="observation">
                     <div class="observation-header">${observation.code.coding[0].display}</div>
@@ -106,18 +107,15 @@
                         <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
                         <p><strong>Subject Reference:</strong> ${observation.subject.reference}</p>
                         <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
-                        <p><strong>Effective DateTime:</strong> ${observation.effectiveDateTime}</p>
+                        <p><strong>Effective DateTime:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
                         <p><strong>Status:</strong> ${observation.status}</p>
-                        ${Object.hasOwnProperty(observation.issued) ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
-                        ${Object.hasOwnProperty(observation.valueQuantity) ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
-                        ${Object.hasOwn(observation, "id") ? `<p><strong>Issd:</strong> ${observation.id}</p>` : ''}
+                        ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
+                        ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>Resource ID:</strong> ${observation.id}</p>
                     </div>
                 </div>
             `;
         });
-        //<p><strong>Identifier:</strong> ${observation.identifier[0].value}</p>
-        //<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
@@ -192,7 +190,7 @@
         $('#diastolicbp').html(p.diastolicbp);
         $('#ldl').html(p.ldl);
         $('#hdl').html(p.hdl);
-        //$('#data').html(JSON.stringify(p.data));
+
         displayObservations(p.data);
     };
 })(window);
