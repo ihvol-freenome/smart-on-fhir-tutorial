@@ -25,7 +25,6 @@
                 '27926-5', '29771-3', '56490-6', '56491-4', '57905-2', '58453-2', '80372-6',
                 '60515-4', '72531-7', '79069-1', '79071-7', '79101-2', '82688-3'
             ];
-            //crc_codes.push.apply(crc_codes, ['8302-2','8480-6', '8462-4', '2085-9','55284-4', '2089-1']);
 
             // Concatenate the string to each item in the array
             var crc_codes_urls = crc_codes.map(function(item) {
@@ -36,6 +35,17 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
+                var fname = '';
+                var lname = '';
+                if (typeof patient.name[0] !== 'undefined') {
+                    fname = patient.name[0].given.join(' ');
+                    lname = patient.name[0].family.join(' ');
+                }
+                var age = getAge(patient.birthDate)
+                if (age < 45 || age > 75){
+                    console.log("${fname} ${lname} is outside of CRC screening eligible age.");
+                    //$('#errors').html('<p> Failed to call FHIR Service </p>');
+                }
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -50,31 +60,19 @@
                     console.log(obv);
                     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
-                    var fname = '';
-                    var lname = '';
-                    if (typeof patient.name[0] !== 'undefined') {
-                        fname = patient.name[0].given.join(' ');
-                        lname = patient.name[0].family.join(' ');
-                    }
+                    //var fname = '';
+                    //var lname = '';
+                    //if (typeof patient.name[0] !== 'undefined') {
+                    //    fname = patient.name[0].given.join(' ');
+                    //    lname = patient.name[0].family.join(' ');
+                    //}
                     var height = byCodes('8302-2');
-                    //var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
-                    //var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
-                    //var hdl = byCodes('2085-9');
-                    //var ldl = byCodes('2089-1');
                     var p = defaultPatient();
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
                     p.lname = lname;
-                    //p.height = getQuantityValueAndUnit(height[0]);
-                    //if (typeof systolicbp != 'undefined') {
-                    //    p.systolicbp = systolicbp;
-                    //}
-                    //if (typeof diastolicbp != 'undefined') {
-                    //    p.diastolicbp = diastolicbp;
-                    //}
-                    //p.hdl = getQuantityValueAndUnit(hdl[0]);
-                    //p.ldl = getQuantityValueAndUnit(ldl[0]);
+                    p.age = getAge(patient.birthDate)
                     //for (let i = 0; i < crc_codes.length; i++) {
                     //    data = byCodes(crc_codes[i]);
                     //    if (data === undefined || data.length == 0) {
@@ -82,8 +80,8 @@
                     //    }
                     //    p.data = data;
                     //}
+
                     p.data = obv
-                    //p.data = JSON.stringify(byCodes('18746-8'));
                     console.log('rendered patient data...');
                     ret.resolve(p);
                 });
@@ -100,6 +98,10 @@
         console.log("rendering observations...");
         observationData.forEach(observation => {
             console.log(observation.id);
+            var obv_date = getAge(observation.effectiveDateTime)
+            if (obv_date > 11){
+                console.log("observation outdated")
+            }
             observationsHTML += `
                 <div class="observation">
                     <div class="observation-header">${observation.code.coding[0].display}</div>
@@ -152,23 +154,21 @@
             data: {
                 value: ''
             },
+            age: {
+                value: ''
+            },
         };
     }
 
-    function getBloodPressureValue(BPObservations, typeOfPressure) {
-        var formattedBPObservations = [];
-        BPObservations.forEach(function(observation) {
-            var BP = observation.component.find(function(component) {
-                return component.code.coding.find(function(coding) {
-                    return coding.code == typeOfPressure;
-                });
-            });
-            if (BP) {
-                observation.valueQuantity = BP.valueQuantity;
-                formattedBPObservations.push(observation);
-            }
-        });
-        return getQuantityValueAndUnit(formattedBPObservations[0]);
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
     }
 
     function getQuantityValueAndUnit(ob) {
@@ -186,11 +186,7 @@
         $('#lname').html(p.lname);
         $('#gender').html(p.gender);
         $('#birthdate').html(p.birthdate);
-        //$('#height').html(p.height);
-        //$('#systolicbp').html(p.systolicbp);
-        //$('#diastolicbp').html(p.diastolicbp);
-        //$('#ldl').html(p.ldl);
-        //$('#hdl').html(p.hdl);
+        $('#age').html(p.age);
 
         displayObservations(p.data);
     };
