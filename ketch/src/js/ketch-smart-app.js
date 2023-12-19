@@ -185,5 +185,6 @@
         $('#ldl').html(p.ldl);
         $('#hdl').html(p.hdl);
         //$('#data').html(JSON.stringify(p.data));
+        displayObservations(p.data);
     };
 })(window);
