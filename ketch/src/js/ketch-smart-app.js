@@ -108,6 +108,7 @@
                         <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
                         <p><strong>Effective DateTime:</strong> ${observation.effectiveDateTime}</p>
                         <p><strong>Status:</strong> ${observation.status}</p>
+                        ${Object.hasOwnProperty(observation.issued) ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
                         ${Object.hasOwnProperty(observation.valueQuantity) ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>ID:</strong> ${observation.id}</p>
                     </div>
