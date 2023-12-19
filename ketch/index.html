@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-    <title>ihvol-freenome Example-SMART-App</title>
+    <title>ihvol-freenome Ketch SMART-App</title>
 
     <link rel='stylesheet' type='text/css' href='./src/css/ketch-smart-app.css'>
     <!--
@@ -12,67 +12,43 @@
     -->
   </head>
   <body>
-    <div id='errors'>
-    </div>
-    <div id="loading" class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
-    <div id='holder' >
-      <h2>Ketch - Freenome SMART-App</h2>
+    <div class="container">
+        <div class="header">
+          <h2>Ketch - Freenome SMART-App</h2>
+        </div>
+        <div id='errors'>
+        </div>
+        <div id="loading" class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
 
-      <h2>Patient Info</h2>
-      <table>
-        <tr>
-          <th>First Name:</th>
-          <td id='fname'></td>
-        </tr>
-        <tr>
-          <th>Last Name:</th>
-          <td id='lname'></td>
-        </tr>
-        <tr>
-          <th>Gender:</th>
-          <td id='gender'></td>
-        </tr>
-        <tr>
-          <th>Date of Birth:</th>
-          <td id='birthdate'></td>
-        </tr>
-      </table>
-      <h2>Observation Resources</h2>
-      <table>
-        <tr>
-          <th>Height:</th>
-          <td id='height'></td>
-        </tr>
-        <tr>
-          <th>Systolic Blood Pressure:</th>
-          <td id='systolicbp'></td>
-
-        </tr>
-        <tr>
-          <th>Diastolic Blood Pressure:</th>
-          <td id='diastolicbp'></td>
-        </tr>
-        <tr>
-          <th>LDL:</th>
-          <td id='ldl'></td>
-        </tr>
-        <tr>
-          <th>HDL:</th>
-          <td id='hdl'></td>
-        </tr>
-        <tr>
-          <th>Data:</th>
-          <td id='data'></td>
-        </tr>
-      </table>
-    </div>
-    <div class="observations">
-        <h2>CRC related screenings</h2>
-        <div id="observationsData" class="info-box"></div>
+        <div id="holder" class="patient-info">
+          <h2>Patient Info</h2>
+          <table>
+            <tr>
+              <th>First Name:</th>
+              <td id='fname'></td>
+            </tr>
+            <tr>
+              <th>Last Name:</th>
+              <td id='lname'></td>
+            </tr>
+            <tr>
+              <th>Gender:</th>
+              <td id='gender'></td>
+            </tr>
+            <tr>
+              <th>Date of Birth:</th>
+              <td id='birthdate'></td>
+            </tr>
+          </table>
+        </div>
+        <div class="observations">
+            <h2>CRC related screenings</h2>
+            <div id="observationsData" class="info-box"></div>
+        </div>
     </div>
     <!-- Required JS files to enable this page to embed within an MPage -->
     <!--

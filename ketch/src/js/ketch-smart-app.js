@@ -185,11 +185,11 @@
         $('#lname').html(p.lname);
         $('#gender').html(p.gender);
         $('#birthdate').html(p.birthdate);
-        $('#height').html(p.height);
-        $('#systolicbp').html(p.systolicbp);
-        $('#diastolicbp').html(p.diastolicbp);
-        $('#ldl').html(p.ldl);
-        $('#hdl').html(p.hdl);
+        //$('#height').html(p.height);
+        //$('#systolicbp').html(p.systolicbp);
+        //$('#diastolicbp').html(p.diastolicbp);
+        //$('#ldl').html(p.ldl);
+        //$('#hdl').html(p.hdl);
 
         displayObservations(p.data);
     };
