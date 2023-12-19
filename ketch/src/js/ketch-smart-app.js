@@ -103,13 +103,14 @@
                     <div class="observation-header">${observation.code.coding[0].display}</div>
                     <div class="observation-details">
                         <p><strong>ID:</strong> ${observation.id}</p>
-                        <p><strong>Identifier:</strong> ${observation.identifier[0].value}</p>
+                        <p><strong>Status:</strong> ${observation.status}</p>
                         <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
-                        <p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>
                     </div>
                 </div>
             `;
         });
+        //<p><strong>Identifier:</strong> ${observation.identifier[0].value}</p>
+        //<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
