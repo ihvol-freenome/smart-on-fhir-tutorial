@@ -111,7 +111,7 @@
                         ${Object.hasOwnProperty(observation.issued) ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
                         ${Object.hasOwnProperty(observation.valueQuantity) ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         ${Object.hasOwnProperty(observation.id) ? `<p><strong>Issd:</strong> ${observation.id}</p>` : ''}
-                        <p><strong>ID:</strong> ${observation.id}</p>
+                        <p><strong>Resource ID:</strong> ${observation.id}</p>
                     </div>
                 </div>
             `;
