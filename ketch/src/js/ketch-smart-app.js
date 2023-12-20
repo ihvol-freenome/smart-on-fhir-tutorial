@@ -30,7 +30,6 @@
             var crc_codes_urls = crc_codes.map(function(item) {
                 return 'http://loinc.org|' + item;
             });
-            console.log(crc_codes_urls);
 
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
@@ -58,11 +57,8 @@
                     var age = getAge(patient.birthDate);
                     var in_out = "inside";
                     if (age < 45 || age > 75){
-                        //console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
-                        //$('#errors').html(`<p> ${fname} ${lname} is outside of CRC screening eligible age</p>`);
                         in_out = "outside"
                     }
-                    //var height = byCodes('8302-2');
                     var p = defaultPatient();
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
@@ -84,9 +80,7 @@
 
     function displayObservations(observationData) {
         let observationsHTML = '';
-        console.log("rendering observations...");
         observationData.forEach(observation => {
-            console.log(observation.id);
             var obv_date = getAge(observation.effectiveDateTime);
             if (obv_date > 11){ // MAX 11 years of history
                 console.log("observation outdated");
@@ -129,18 +123,6 @@
             height: {
                 value: ''
             },
-            //systolicbp: {
-            //    value: ''
-            //},
-            //diastolicbp: {
-            //    value: ''
-            //},
-            //ldl: {
-            //    value: ''
-            //},
-            //hdl: {
-            //    value: ''
-            //},
             data: {
                 value: ''
             },
