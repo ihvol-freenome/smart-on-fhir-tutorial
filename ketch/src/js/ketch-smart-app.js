@@ -119,6 +119,7 @@
                     <div class="observation-details">
                         <p><strong>Type:</strong> ${observation.resourceType}</p>
                         <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
+                        ${Object.hasOwn(observation, "category") ? `<p><strong>Category:</strong> ${observation.category.coding[0].code}</p>` : ''}
                         <p><strong>Subject:</strong> ${observation.subject.reference}</p>
                         ${Object.hasOwn(observation, "encounter") ? `<p><strong>Encounter:</strong> ${observation.encounter.reference}</p>` : ''}
                         ${Object.hasOwn(observation, "effectiveDateTime") ? `<p><strong>Effective:</strong> ${observation.effectiveDateTime}</p>` : ''}
@@ -131,7 +132,6 @@
                 </div>
             `;
         });
-        //${Object.hasOwn(observation, "category") ? `<p><strong>Category:</strong> ${observation.category.coding[0].code}</p>` : ''}
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
