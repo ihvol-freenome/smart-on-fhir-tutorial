@@ -67,7 +67,7 @@
                     p.lname = lname;
                     p.age = age
                     p.eligible = `${fname} ${lname} is ${in_out} of CRC screening eligible age.`
-                    p.data = obv
+                    p.data =  (obv === undefined || obv.length == 0) ? [] : obv
                     console.log('rendered patient and obs data...');
                     //ret.resolve(p);
                 });
