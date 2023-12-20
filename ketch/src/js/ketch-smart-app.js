@@ -43,12 +43,19 @@
                         }
                     }
                 });
-                var p = defaultPatient();
-                p.data = []
-                $.when(pt, obv).fail(onError);
-                $.when(pt, obv).done(function(patient, obv) {
+                var proc = smart.patient.api.fetchAll({
+                    type: 'Procedure',
+                    query: {
+                        code: {
+                            $or: crc_codes_urls
+                        }
+                    }
+                });
+                $.when(pt, obv, proc).fail(onError);
+                $.when(pt, obv, proc).done(function(patient, obv, proc) {
                     console.log('loaded patient data...');
                     console.log(obv);
+                    console.log(proc);
                     var byCodes = smart.byCodes(obv, 'code');
                     var gender = patient.gender;
                     var fname = '';
@@ -62,6 +69,7 @@
                     if (age < 45 || age > 75){
                         in_out = "outside"
                     }
+                    var p = defaultPatient();
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
@@ -69,35 +77,41 @@
                     p.age = age
                     p.eligible = `${fname} ${lname} is ${in_out} of CRC screening eligible age.`
                     //p.data =  (obv === undefined || obv.length == 0) ? [] : obv
-                    p.data =  obv
+                    if (obv === undefined){
+                        obv = []
+                    }
+                    if (proc === undefined){
+                        proc = []
+                    }
+                    p.data =  obv.concat(proc)
                     console.log('rendered patient and obs data...');
-                    //ret.resolve(p);
-                });
-
-                var proc = smart.patient.api.fetchAll({
-                    type: 'Procedure',
-                    query: {
-                        code: {
-                            $or: crc_codes_urls
-                        }
-                    }
-                });
-                $.when(pt, proc).fail(onError);
-                $.when(pt, proc).done(function(patient, proc) {
-                    console.log('loaded procedures...');
-                    console.log(proc);
-                    if (p.data === undefined || p.data.length == 0) {
-                        p.data = proc
-                    } else {
-                        console.log("pdata");
-                        console.log(p.data);
-                        console.log(proc);
-                        //p.data.push.apply(p.data, proc)
-                        p.data = p.data.concat(proc)
-                    }
-                    console.log('rendered procedure data...');
                     ret.resolve(p);
                 });
+
+                //var proc = smart.patient.api.fetchAll({
+                //    type: 'Procedure',
+                //    query: {
+                //        code: {
+                //            $or: crc_codes_urls
+                //        }
+                //    }
+                //});
+                //$.when(pt, proc).fail(onError);
+                //$.when(pt, proc).done(function(patient, proc) {
+                //    console.log('loaded procedures...');
+                //    console.log(proc);
+                //    if (p.data === undefined || p.data.length == 0) {
+                //        p.data = proc
+                //    } else {
+                //        console.log("pdata");
+                //        console.log(p.data);
+                //        console.log(proc);
+                //        //p.data.push.apply(p.data, proc)
+                //        p.data = p.data.concat(proc)
+                //    }
+                //    console.log('rendered procedure data...');
+                //    ret.resolve(p);
+                //});
 
             } else {
                 onError();
