@@ -35,12 +35,6 @@
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
                 var pt = patient.read();
-                //var fname = '';
-                //var lname = '';
-                //if (typeof patient.name[0] !== 'undefined') {
-                //    fname = patient.name[0].given.join(' ');
-                //    lname = patient.name[0].family.join(' ');
-                //}
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -62,28 +56,18 @@
                         lname = patient.name[0].family.join(' ');
                     }
                     var age = getAge(patient.birthDate);
-                    var age_diff = age < 45 || age > 75;
-                    console.log(`${age_diff} | ${age} is outside of CRC screening eligible age.`);
                     if (age < 45 || age > 75){
-                        //console.log(`is outside of CRC screening eligible age.`);
                         console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
-                        $('#errors').html('<p> is outside of CRC screening eligible age</p>');
+                        $('#errors').html('<p> ${fname} ${lname} is outside of CRC screening eligible age</p>');
+                        return;
                     }
-                    var height = byCodes('8302-2');
+                    //var height = byCodes('8302-2');
                     var p = defaultPatient();
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
                     p.lname = lname;
                     p.age = getAge(patient.birthDate)
-                    //for (let i = 0; i < crc_codes.length; i++) {
-                    //    data = byCodes(crc_codes[i]);
-                    //    if (data === undefined || data.length == 0) {
-                    //        continue;
-                    //    }
-                    //    p.data = data;
-                    //}
-
                     p.data = obv
                     console.log('rendered patient data...');
                     ret.resolve(p);
@@ -102,8 +86,9 @@
         observationData.forEach(observation => {
             console.log(observation.id);
             var obv_date = getAge(observation.effectiveDateTime);
-            if (obv_date > 11){
+            if (obv_date > 11){ // MAX 11 years of history
                 console.log("observation outdated");
+                return;
             }
             observationsHTML += `
                 <div class="observation">
@@ -142,18 +127,18 @@
             height: {
                 value: ''
             },
-            systolicbp: {
-                value: ''
-            },
-            diastolicbp: {
-                value: ''
-            },
-            ldl: {
-                value: ''
-            },
-            hdl: {
-                value: ''
-            },
+            //systolicbp: {
+            //    value: ''
+            //},
+            //diastolicbp: {
+            //    value: ''
+            //},
+            //ldl: {
+            //    value: ''
+            //},
+            //hdl: {
+            //    value: ''
+            //},
             data: {
                 value: ''
             },
