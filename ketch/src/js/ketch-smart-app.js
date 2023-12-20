@@ -56,10 +56,11 @@
                         lname = patient.name[0].family.join(' ');
                     }
                     var age = getAge(patient.birthDate);
+                    var in_out = "inside";
                     if (age < 45 || age > 75){
-                        console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
-                        $('#errors').html('<p> ${fname} ${lname} is outside of CRC screening eligible age</p>');
-                        return;
+                        //console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
+                        //$('#errors').html(`<p> ${fname} ${lname} is outside of CRC screening eligible age</p>`);
+                        in_out = "outside"
                     }
                     //var height = byCodes('8302-2');
                     var p = defaultPatient();
@@ -67,7 +68,8 @@
                     p.gender = gender;
                     p.fname = fname;
                     p.lname = lname;
-                    p.age = getAge(patient.birthDate)
+                    p.age = age
+                    p.eligible = `${fname} ${lname} is ${in_out} of CRC screening eligible age.`
                     p.data = obv
                     console.log('rendered patient data...');
                     ret.resolve(p);
@@ -175,6 +177,7 @@
         $('#gender').html(p.gender);
         $('#birthdate').html(p.birthdate);
         $('#age').html(p.age);
+        $('#eligible').html(p.eligible);
 
         displayObservations(p.data);
     };
