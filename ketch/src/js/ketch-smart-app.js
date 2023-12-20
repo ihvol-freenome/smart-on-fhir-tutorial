@@ -68,8 +68,8 @@
                     p.age = age
                     p.eligible = `${fname} ${lname} is ${in_out} of CRC screening eligible age.`
                     p.data = obv
-                    console.log('rendered patient data...');
-                    ret.resolve(p);
+                    console.log('rendered patient and obs data...');
+                    //ret.resolve(p);
                 });
 
                 var proc = smart.patient.api.fetchAll({
