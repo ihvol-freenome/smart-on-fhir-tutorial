@@ -42,6 +42,8 @@
                 //    lname = patient.name[0].family.join(' ');
                 //}
                 var age = getAge(patient.birthDate)
+                var age_diff = age < 45 || age > 75
+                console.log("${age_diff} | ${age} is outside of CRC screening eligible age.");
                 if (age < 45 || age > 75){
                     console.log("is outside of CRC screening eligible age.");
                     //console.log("${fname} ${lname} is outside of CRC screening eligible age.");
