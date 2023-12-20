@@ -47,7 +47,7 @@
                 if (age < 45 || age > 75){
                     console.log(`is outside of CRC screening eligible age.`);
                     //console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
-                    //$('#errors').html('<p> Failed to call FHIR Service </p>');
+                    $('#errors').html('<p> is outside of CRC screening eligible age</p>');
                 }
                 var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
