@@ -43,6 +43,7 @@
                         }
                     }
                 });
+                var p = defaultPatient();
                 $.when(pt, obv).fail(onError);
                 $.when(pt, obv).done(function(patient, obv) {
                     console.log('loaded patient data...');
@@ -60,7 +61,6 @@
                     if (age < 45 || age > 75){
                         in_out = "outside"
                     }
-                    var p = defaultPatient();
                     p.birthdate = patient.birthDate;
                     p.gender = gender;
                     p.fname = fname;
