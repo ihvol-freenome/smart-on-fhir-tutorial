@@ -44,6 +44,7 @@
                     }
                 });
                 var p = defaultPatient();
+                p.data = []
                 $.when(pt, obv).fail(onError);
                 $.when(pt, obv).done(function(patient, obv) {
                     console.log('loaded patient data...');
@@ -91,7 +92,8 @@
                         console.log("pdata");
                         console.log(p.data);
                         console.log(proc);
-                        p.data.push.apply(p.data, proc)
+                        //p.data.push.apply(p.data, proc)
+                        p.data = p.data.concat(proc)
                     }
                     console.log('rendered procedure data...');
                     ret.resolve(p);
