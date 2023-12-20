@@ -27,9 +27,10 @@
             ];
 
             // Concatenate the string to each item in the array
-            var crc_codes_urls = crc_codes.map(function(item) {
-                return 'http://loinc.org|' + item;
-            });
+            //var crc_codes_urls = crc_codes.map(function(item) {
+            //    return 'http://loinc.org|' + item;
+            //});
+            var crc_codes_urls = crc_codes;
 
             if (smart.hasOwnProperty('patient')) {
                 var patient = smart.patient;
@@ -95,10 +96,10 @@
                         <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
                         <p><strong>Subject Reference:</strong> ${observation.subject.reference}</p>
                         <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
-                        <p><strong>Effective DateTime:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
-                        <p><strong>Status:</strong> ${observation.status}</p>
+                        <p><strong>Effective:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
                         ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
                         ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
+                        <p><strong>Status:</strong> ${observation.status}</p>
                         <p><strong>Resource ID:</strong> ${observation.id}</p>
                     </div>
                 </div>
