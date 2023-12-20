@@ -94,19 +94,22 @@
                     <div class="observation-details">
                         <p><strong>Type:</strong> ${observation.resourceType}</p>
                         <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
-                        <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
-                        <p><strong>Subject Reference:</strong> ${observation.subject.reference}</p>
-                        <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
-                        <p><strong>Effective:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
+                        ${Object.hasOwn(observation, "category") ? `<p><strong>Category:</strong> ${observation.category}</p>` : ''}
+                        <p><strong>Subject:</strong> ${observation.subject.reference}</p>
+                        ${Object.hasOwn(observation, "encounter") ? `<p><strong>Encounter:</strong> ${observation.encounter.reference}</p>` : ''}
+                        ${Object.hasOwn(observation, "effectiveDateTime") ? `<p><strong>Effective:</strong> ${observation.effectiveDateTime}</p>` : ''}
                         ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
                         ${Object.hasOwn(observation, "performedPeriod") ? `<p><strong>Performed period:</strong> ${observation.performedPeriod}</p>` : ''}
                         ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>Status:</strong> ${observation.status}</p>
-                        <p><strong>Resource ID:</strong> ${observation.id}</p>
+                        <p><strong>ID:</strong> ${observation.id}</p>
                     </div>
                 </div>
             `;
         });
+        //<p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
+        //<p><strong>Effective:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
+        //<p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
