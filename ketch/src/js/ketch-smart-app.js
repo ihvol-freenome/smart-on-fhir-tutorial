@@ -67,7 +67,8 @@
                     p.lname = lname;
                     p.age = age
                     p.eligible = `${fname} ${lname} is ${in_out} of CRC screening eligible age.`
-                    p.data =  (obv === undefined || obv.length == 0) ? [] : obv
+                    //p.data =  (obv === undefined || obv.length == 0) ? [] : obv
+                    p.data =  obv
                     console.log('rendered patient and obs data...');
                     //ret.resolve(p);
                 });
@@ -84,7 +85,11 @@
                 $.when(pt, proc).done(function(patient, proc) {
                     console.log('loaded procedures...');
                     console.log(proc);
-                    p.data.push.apply(p.data, proc)
+                    if (p.data === undefined || p.data.length == 0) {
+                        p.data = proc
+                    } else {
+                        p.data.push.apply(p.data, proc)
+                    }
                     console.log('rendered procedure data...');
                     ret.resolve(p);
                 });
