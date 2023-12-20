@@ -41,12 +41,12 @@
                 //    fname = patient.name[0].given.join(' ');
                 //    lname = patient.name[0].family.join(' ');
                 //}
-                var age = getAge(patient.birthDate)
-                var age_diff = age < 45 || age > 75
-                console.log("${age_diff} | ${age} is outside of CRC screening eligible age.");
+                var age = getAge(patient.birthDate);
+                var age_diff = age < 45 || age > 75;
+                console.log(`${age_diff} | ${age} is outside of CRC screening eligible age.`);
                 if (age < 45 || age > 75){
-                    console.log("is outside of CRC screening eligible age.");
-                    //console.log("${fname} ${lname} is outside of CRC screening eligible age.");
+                    console.log(`is outside of CRC screening eligible age.`);
+                    //console.log(`${fname} ${lname} is outside of CRC screening eligible age.`);
                     //$('#errors').html('<p> Failed to call FHIR Service </p>');
                 }
                 var obv = smart.patient.api.fetchAll({
@@ -101,9 +101,9 @@
         console.log("rendering observations...");
         observationData.forEach(observation => {
             console.log(observation.id);
-            var obv_date = getAge(observation.effectiveDateTime)
+            var obv_date = getAge(observation.effectiveDateTime);
             if (obv_date > 11){
-                console.log("observation outdated")
+                console.log("observation outdated");
             }
             observationsHTML += `
                 <div class="observation">
