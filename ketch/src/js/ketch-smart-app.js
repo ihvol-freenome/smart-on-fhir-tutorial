@@ -88,30 +88,6 @@
                     ret.resolve(p);
                 });
 
-                //var proc = smart.patient.api.fetchAll({
-                //    type: 'Procedure',
-                //    query: {
-                //        code: {
-                //            $or: crc_codes_urls
-                //        }
-                //    }
-                //});
-                //$.when(pt, proc).fail(onError);
-                //$.when(pt, proc).done(function(patient, proc) {
-                //    console.log('loaded procedures...');
-                //    console.log(proc);
-                //    if (p.data === undefined || p.data.length == 0) {
-                //        p.data = proc
-                //    } else {
-                //        console.log("pdata");
-                //        console.log(p.data);
-                //        console.log(proc);
-                //        //p.data.push.apply(p.data, proc)
-                //        p.data = p.data.concat(proc)
-                //    }
-                //    console.log('rendered procedure data...');
-                //    ret.resolve(p);
-                //});
 
             } else {
                 onError();
