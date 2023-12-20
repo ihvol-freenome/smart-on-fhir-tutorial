@@ -36,8 +36,7 @@
                 var patient = smart.patient;
                 var pt = patient.read();
                 var obv = smart.patient.api.fetchAll({
-                    //type: 'Observation',
-                    type: 'Procedure',
+                    type: 'Observation',
                     query: {
                         code: {
                             $or: crc_codes_urls
@@ -72,6 +71,24 @@
                     console.log('rendered patient data...');
                     ret.resolve(p);
                 });
+
+                var proc = smart.patient.api.fetchAll({
+                    type: 'Procedure',
+                    query: {
+                        code: {
+                            $or: crc_codes_urls
+                        }
+                    }
+                });
+                $.when(pt, proc).fail(onError);
+                $.when(pt, proc).done(function(patient, proc) {
+                    console.log('loaded procedures...');
+                    console.log(proc);
+                    p.data.push.apply(p.data, proc)
+                    console.log('rendered procedure data...');
+                    ret.resolve(p);
+                });
+
             } else {
                 onError();
             }
@@ -83,7 +100,7 @@
     function displayObservations(observationData) {
         let observationsHTML = '';
         observationData.forEach(observation => {
-            var obv_date = getAge(observation.effectiveDateTime);
+            var obv_date =  observation.resourceType == "Observation" ? getAge(observation.effectiveDateTime) : getAge(observation.performedPeriod.start);
             if (obv_date > 11){ // MAX 11 years of history
                 console.log("observation outdated");
                 return;
@@ -99,7 +116,7 @@
                         ${Object.hasOwn(observation, "encounter") ? `<p><strong>Encounter:</strong> ${observation.encounter.reference}</p>` : ''}
                         ${Object.hasOwn(observation, "effectiveDateTime") ? `<p><strong>Effective:</strong> ${observation.effectiveDateTime}</p>` : ''}
                         ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
-                        ${Object.hasOwn(observation, "performedPeriod") ? `<p><strong>Performed period:</strong> ${observation.performedPeriod}</p>` : ''}
+                        ${Object.hasOwn(observation, "performedPeriod") ? `<p><strong>Performed period:</strong> ${getPerformedPeriod(observation.performedPeriod)}</p>` : ''}
                         ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>Status:</strong> ${observation.status}</p>
                         <p><strong>ID:</strong> ${observation.id}</p>
@@ -107,9 +124,6 @@
                 </div>
             `;
         });
-        //<p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
-        //<p><strong>Effective:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
-        //<p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
@@ -172,6 +186,18 @@
             return undefined;
         }
     }
+
+    function getPerformedPeriod(ob) {
+        if (typeof ob != 'undefined' && typeof ob.start!= 'undefined') {
+            if (typeof ob.end != 'undefined') {
+                return ob.start + ' - ' + ob.end;
+            }
+            return ob.start;
+        } else {
+            return '';
+        }
+    }
+
     window.drawVisualization = function(p) {
         $('#holder').show();
         $('#loading').hide();
