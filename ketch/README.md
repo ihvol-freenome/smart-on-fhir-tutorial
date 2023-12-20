@@ -6,7 +6,7 @@
 2. Choose "Provider EHR Launch" or "Patient Portal Launch" for the Launch Type.
 3. Select FHIR Version: R2(DSTU2).
 4. Click the "Open Patient Browser" button to open a new window.
-    a. Search or browse patients, utilizing the Conditions tab to search for patients with specific condition codes.
+    a. Search or browse patients, utilizing the Conditions tab to search for patients with specific condition codes, e.g. type "colon"
     b. Choose one or more patients; you will be prompted to select one later.
     c. To deselect previously chosen patients, click the "View selected" button and make your changes.
     d. Click "Ok."
