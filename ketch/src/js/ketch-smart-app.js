@@ -35,7 +35,8 @@
                 var patient = smart.patient;
                 var pt = patient.read();
                 var obv = smart.patient.api.fetchAll({
-                    type: 'Observation',
+                    //type: 'Observation',
+                    type: 'Procedure',
                     query: {
                         code: {
                             $or: crc_codes_urls
@@ -78,7 +79,7 @@
         return ret.promise();
     };
 
-    function displayObservations(observationData) {
+    function displayObservations_orig(observationData) {
         let observationsHTML = '';
         observationData.forEach(observation => {
             var obv_date = getAge(observation.effectiveDateTime);
@@ -99,6 +100,20 @@
                         ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
                         ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>Resource ID:</strong> ${observation.id}</p>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('observationsData').innerHTML = observationsHTML;
+    }
+
+    function displayObservations(observationData) {
+        let observationsHTML = '';
+        observationData.forEach(observation => {
+            observationsHTML += `
+                <div class="observation">
+                    <div class="observation-details">
+                        <p><strong>Code:</strong> ${JSON.stringify(observation)}</p>
                     </div>
                 </div>
             `;
