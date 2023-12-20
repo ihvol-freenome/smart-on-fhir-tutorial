@@ -80,7 +80,7 @@
         return ret.promise();
     };
 
-    function displayObservations_orig(observationData) {
+    function displayObservations(observationData) {
         let observationsHTML = '';
         observationData.forEach(observation => {
             var obv_date = getAge(observation.effectiveDateTime);
@@ -92,12 +92,14 @@
                 <div class="observation">
                     <div class="observation-header">${observation.code.coding[0].display}</div>
                     <div class="observation-details">
+                        <p><strong>Type:</strong> ${observation.resourceType}</p>
                         <p><strong>Code:</strong> ${observation.code.coding[0].code}</p>
                         <p><strong>Category:</strong> ${observation.category.coding[0].code}</p>
                         <p><strong>Subject Reference:</strong> ${observation.subject.reference}</p>
                         <p><strong>Encounter Reference:</strong> ${observation.encounter.reference}</p>
                         <p><strong>Effective:</strong> ${Object.hasOwn(observation, "effectiveDateTime") ? observation.effectiveDateTime : ''}</p>
                         ${Object.hasOwn(observation, "issued") ? `<p><strong>Issued:</strong> ${observation.issued}</p>` : ''}
+                        ${Object.hasOwn(observation, "performedPeriod") ? `<p><strong>Performed period:</strong> ${observation.performedPeriod}</p>` : ''}
                         ${Object.hasOwn(observation, "valueQuantity") ? `<p><strong>Value:</strong> ${observation.valueQuantity.value} ${observation.valueQuantity.unit}</p>` : ''}
                         <p><strong>Status:</strong> ${observation.status}</p>
                         <p><strong>Resource ID:</strong> ${observation.id}</p>
@@ -108,7 +110,7 @@
         document.getElementById('observationsData').innerHTML = observationsHTML;
     }
 
-    function displayObservations(observationData) {
+    function displayObservations_new(observationData) {
         let observationsHTML = '';
         observationData.forEach(observation => {
             observationsHTML += `
