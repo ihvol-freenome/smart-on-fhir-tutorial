@@ -88,6 +88,9 @@
                     if (p.data === undefined || p.data.length == 0) {
                         p.data = proc
                     } else {
+                        console.log("pdata");
+                        console.log(p.data);
+                        console.log(proc);
                         p.data.push.apply(p.data, proc)
                     }
                     console.log('rendered procedure data...');
@@ -164,7 +167,7 @@
                 value: ''
             },
             data: {
-                value: ''
+                value: []
             },
             age: {
                 value: ''
